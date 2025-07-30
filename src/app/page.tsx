@@ -1,0 +1,30 @@
+import { Suspense } from 'react'
+import { Header } from '@/components/header'
+import { Hero } from '@/components/hero'
+import { Features } from '@/components/features'
+import { Pricing } from '@/components/pricing'
+import { Testimonials } from '@/components/testimonials'
+import { FAQ } from '@/components/faq'
+import { Contact } from '@/components/contact'
+import { Footer } from '@/components/footer'
+import { ScrollProgress } from '@/components/scroll-progress'
+import { FloatingChat } from '@/components/floating-chat'
+import { WhyChooseUs } from '@/components/why-choose-us'
+
+export default function Home() {
+  return (
+    <main className="min-h-screen gradient-bg">
+      <ScrollProgress />
+      <Header />
+      <Hero />
+      <Features />
+      <WhyChooseUs />
+      <Pricing />
+      <Testimonials />
+      <FAQ />
+      <Contact />
+      <Footer />
+      <FloatingChat />
+    </main>
+  )
+} 
