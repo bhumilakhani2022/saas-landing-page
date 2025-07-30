@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: 'ADmyBRAND AI Suite - Next-Gen AI-Powered Marketing Platform',
   description: 'Transform your marketing with AI-powered insights, automation, and analytics. The complete marketing suite for modern businesses.',
   keywords: 'AI marketing, marketing automation, analytics, SaaS, digital marketing',
@@ -35,8 +36,12 @@ export const metadata: Metadata = {
     description: 'Transform your marketing with AI-powered insights, automation, and analytics.',
     images: ['/og-image.jpg'],
   },
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport: Viewport = {
   themeColor: '#0ea5e9',
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -58,4 +63,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-} 
+}
