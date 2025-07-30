@@ -61,6 +61,16 @@ const pricingPlans = [
 export function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true)
   const [selectedPlan, setSelectedPlan] = useState('Professional')
+  const [teamMembers, setTeamMembers] = useState(10)
+  const [monthlyCampaigns, setMonthlyCampaigns] = useState(100)
+
+  const calculatePrice = () => {
+    const basePrice = 49
+    const memberPrice = teamMembers * 5
+    const campaignPrice = monthlyCampaigns * 0.1
+    const total = basePrice + memberPrice + campaignPrice
+    return isAnnual ? Math.round(total * 0.8) : Math.round(total)
+  }
 
   return (
     <section id="pricing" className="section-padding bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
@@ -104,15 +114,16 @@ export function Pricing() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 items-stretch">
           {pricingPlans.map((plan) => (
-            <PricingCard
-              key={plan.name}
-              plan={plan}
-              isAnnual={isAnnual}
-              isSelected={selectedPlan === plan.name}
-              onSelect={() => setSelectedPlan(plan.name)}
-            />
+            <div key={plan.name} className="flex">
+              <PricingCard
+                plan={plan}
+                isAnnual={isAnnual}
+                isSelected={selectedPlan === plan.name}
+                onSelect={() => setSelectedPlan(plan.name)}
+              />
+            </div>
           ))}
         </div>
 
@@ -130,11 +141,13 @@ export function Pricing() {
                 type="range"
                 min="1"
                 max="100"
-                defaultValue="10"
+                value={teamMembers}
+                onChange={(e) => setTeamMembers(parseInt(e.target.value))}
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>1</span>
+                <span>{teamMembers}</span>
                 <span>100+</span>
               </div>
             </div>
@@ -146,11 +159,13 @@ export function Pricing() {
                 type="range"
                 min="10"
                 max="1000"
-                defaultValue="100"
+                value={monthlyCampaigns}
+                onChange={(e) => setMonthlyCampaigns(parseInt(e.target.value))}
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>10</span>
+                <span>{monthlyCampaigns}</span>
                 <span>1000+</span>
               </div>
             </div>
@@ -159,7 +174,7 @@ export function Pricing() {
                 Estimated Cost
               </label>
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                $149
+                ${calculatePrice()}
                 <span className="text-sm font-normal text-gray-500">/month</span>
               </div>
             </div>
@@ -181,4 +196,4 @@ export function Pricing() {
       </div>
     </section>
   )
-} 
+}

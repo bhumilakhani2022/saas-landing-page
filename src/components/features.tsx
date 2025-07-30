@@ -71,7 +71,7 @@ export function Features() {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
-              entry.target.classList.add('animate-slide-up')
+              entry.target.classList.add('animate-slide-up', 'opacity-100')
             }, index * 100)
           }
         })
@@ -117,26 +117,7 @@ export function Features() {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 md:p-12 text-white">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to Transform Your Marketing?
-            </h3>
-            <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
-              Join thousands of marketers who are already using ADmyBRAND AI Suite to scale their campaigns and drive results.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-white text-primary-600 font-semibold px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors duration-300">
-                Start Free Trial
-              </button>
-              <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/20 transition-colors duration-300">
-                Schedule Demo
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )
-} 
+}

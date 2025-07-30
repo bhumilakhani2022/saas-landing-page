@@ -23,7 +23,7 @@ export function PricingCard({ plan, isAnnual, isSelected, onSelect }: PricingCar
   const displayPrice = isAnnual ? annualPrice : plan.price
 
   return (
-    <div className={`relative group ${isSelected ? 'scale-105' : ''} transition-all duration-300`}>
+    <div className={`relative group w-full ${isSelected ? 'scale-105' : ''} transition-all duration-300`}>
       {/* Popular Badge */}
       {plan.popular && (
         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -34,7 +34,7 @@ export function PricingCard({ plan, isAnnual, isSelected, onSelect }: PricingCar
         </div>
       )}
 
-      <div className={`relative p-8 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border-2 rounded-2xl transition-all duration-300 ${
+      <div className={`relative p-8 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border-2 rounded-2xl transition-all duration-300 flex flex-col h-full ${
         isSelected 
           ? 'border-primary-500 shadow-xl' 
           : 'border-gray-200/20 dark:border-gray-700/20 hover:border-primary-300/50'
@@ -64,7 +64,7 @@ export function PricingCard({ plan, isAnnual, isSelected, onSelect }: PricingCar
         </div>
 
         {/* Features */}
-        <div className="relative space-y-4 mb-8">
+        <div className="relative space-y-4 mb-8 flex-grow">
           {plan.features.map((feature, index) => (
             <div key={index} className="flex items-start space-x-3">
               <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mt-0.5">
@@ -78,7 +78,7 @@ export function PricingCard({ plan, isAnnual, isSelected, onSelect }: PricingCar
         </div>
 
         {/* CTA Button */}
-        <div className="relative">
+        <div className="relative mt-auto">
           <button
             onClick={onSelect}
             className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${
@@ -93,4 +93,4 @@ export function PricingCard({ plan, isAnnual, isSelected, onSelect }: PricingCar
       </div>
     </div>
   )
-} 
+}

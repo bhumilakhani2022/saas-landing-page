@@ -17,6 +17,11 @@ A modern, visually stunning landing page for ADmyBRAND AI Suite, a next-gen AI-p
   - Floating chat widget
   - Scroll progress indicator
   - Animated counters
+- **Dashboard Features**:
+  - Overview page with key metrics cards (Revenue, Users, Conversions, Growth %)
+  - Interactive charts (Line chart, Bar chart, Pie chart)
+  - Data table with sorting, filtering, and pagination
+  - Responsive dashboard layout with sidebar navigation
 
 ## 🚀 Tech Stack
 
@@ -26,6 +31,7 @@ A modern, visually stunning landing page for ADmyBRAND AI Suite, a next-gen AI-p
 - **Icons**: Lucide React
 - **Animations**: CSS animations and Intersection Observer API
 - **Theme**: Custom glassmorphism and neumorphism design
+- **Charts**: Recharts for interactive data visualization
 
 ## 📦 Installation
 
@@ -55,10 +61,19 @@ src/
 ├── app/
 │   ├── globals.css          # Global styles and Tailwind config
 │   ├── layout.tsx           # Root layout with theme provider
-│   └── page.tsx             # Main landing page
+│   ├── page.tsx             # Main landing page
+│   └── dashboard/           # Dashboard pages
+│       ├── layout.tsx       # Dashboard layout with theme provider
+│       └── page.tsx         # Dashboard overview page
 ├── components/
 │   ├── ui/                  # Reusable UI components
 │   │   └── button.tsx       # Button component with variants
+│   ├── dashboard/           # Dashboard components
+│   │   ├── dashboard-header.tsx    # Dashboard header with search and user profile
+│   │   ├── dashboard-sidebar.tsx   # Dashboard sidebar navigation
+│   │   ├── metrics-cards.tsx       # Key metrics cards component
+│   │   ├── dashboard-charts.tsx    # Interactive charts (line, bar, pie)
+│   │   └── data-table.tsx          # Data table with sorting and pagination
 │   ├── header.tsx           # Navigation header with theme toggle
 │   ├── hero.tsx             # Hero section with animated elements
 │   ├── features.tsx         # Features grid with cards

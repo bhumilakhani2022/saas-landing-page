@@ -1,5 +1,8 @@
-import { Suspense } from 'react'
+'use client'
+
+import { Suspense, useState } from 'react'
 import { Header } from '@/components/header'
+import { DashboardContent } from '@/components/dashboard/dashboard-content'
 import { Hero } from '@/components/hero'
 import { Features } from '@/components/features'
 import { Pricing } from '@/components/pricing'
@@ -12,19 +15,27 @@ import { FloatingChat } from '@/components/floating-chat'
 import { WhyChooseUs } from '@/components/why-choose-us'
 
 export default function Home() {
+  const [showDashboard, setShowDashboard] = useState(false)
+
   return (
     <main className="min-h-screen gradient-bg">
       <ScrollProgress />
-      <Header />
-      <Hero />
-      <Features />
-      <WhyChooseUs />
-      <Pricing />
-      <Testimonials />
-      <FAQ />
-      <Contact />
+      <Header onShowDashboard={() => setShowDashboard(true)} onShowHome={() => setShowDashboard(false)} />
+      {showDashboard ? (
+        <DashboardContent />
+      ) : (
+        <>
+          <Hero />
+          <Features />
+          <WhyChooseUs />
+          <Pricing />
+          <Testimonials />
+          <FAQ />
+          <Contact />
+        </>
+      )}
       <Footer />
       <FloatingChat />
     </main>
   )
-} 
+}

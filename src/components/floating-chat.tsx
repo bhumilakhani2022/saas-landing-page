@@ -3,16 +3,27 @@
 import { useState } from 'react'
 import { MessageCircle, X, Send } from 'lucide-react'
 
+interface ChatMessage {
+  text: string;
+  sender: 'user' | 'bot';
+}
+
 export function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    { text: 'Hi! I\'m here to help you with any questions about ADmyBRAND AI Suite. How can I assist you today?', sender: 'bot' }
+  ])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (message.trim()) {
-      // Simulate sending message
+      setMessages([...messages, { text: message, sender: 'user' }])
       setMessage('')
-      // Here you would typically send the message to your chat service
+      // Simulate bot response
+      setTimeout(() => {
+        setMessages(prev => [...prev, { text: 'Thanks for your message! Our team will get back to you shortly.', sender: 'bot' }])
+      }, 1000)
     }
   }
 
@@ -52,16 +63,20 @@ export function FloatingChat() {
           {/* Messages */}
           <div className="flex-1 p-4 overflow-y-auto">
             <div className="space-y-4">
-              <div className="flex items-start space-x-2">
-                <div className="w-6 h-6 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">A</span>
+              {messages.map((msg, index) => (
+                <div key={index} className={`flex items-start space-x-2 ${msg.sender === 'user' ? 'justify-end' : ''}`}>
+                  {msg.sender === 'bot' && (
+                    <div className="w-6 h-6 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-xs font-bold">A</span>
+                    </div>
+                  )}
+                  <div className={`${msg.sender === 'user' ? 'bg-primary-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'} rounded-lg p-3 max-w-xs`}>
+                    <p className="text-sm">
+                      {msg.text}
+                    </p>
+                  </div>
                 </div>
-                <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 max-w-xs">
-                  <p className="text-sm text-gray-900 dark:text-white">
-                    Hi! I'm here to help you with any questions about ADmyBRAND AI Suite. How can I assist you today?
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 

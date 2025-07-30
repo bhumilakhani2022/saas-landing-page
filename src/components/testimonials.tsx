@@ -10,7 +10,7 @@ const testimonials = [
     name: 'Sarah Johnson',
     role: 'Marketing Director',
     company: 'TechFlow Inc.',
-    avatar: '/avatars/sarah.jpg',
+    avatar: 'https://i.pravatar.cc/150?u=sarah',
     quote: 'ADmyBRAND AI Suite has completely transformed our marketing strategy. The AI insights are incredibly accurate and have helped us increase our conversion rates by 300%.',
     rating: 5
   },
@@ -19,7 +19,7 @@ const testimonials = [
     name: 'Michael Chen',
     role: 'CEO',
     company: 'StartupXYZ',
-    avatar: '/avatars/michael.jpg',
+    avatar: 'https://i.pravatar.cc/150?u=michael',
     quote: 'The automation features are game-changing. We\'ve reduced our campaign setup time from days to hours, and the results speak for themselves.',
     rating: 5
   },
@@ -28,7 +28,7 @@ const testimonials = [
     name: 'Emily Rodriguez',
     role: 'Digital Marketing Manager',
     company: 'GrowthCo',
-    avatar: '/avatars/emily.jpg',
+    avatar: 'https://i.pravatar.cc/150?u=emily',
     quote: 'The precision targeting capabilities are unmatched. We\'re reaching our ideal customers with pinpoint accuracy, and our ROI has never been better.',
     rating: 5
   },
@@ -37,7 +37,7 @@ const testimonials = [
     name: 'David Thompson',
     role: 'VP of Marketing',
     company: 'Enterprise Solutions',
-    avatar: '/avatars/david.jpg',
+    avatar: 'https://i.pravatar.cc/150?u=david',
     quote: 'The analytics dashboard provides insights we never had before. It\'s like having a crystal ball for our marketing campaigns.',
     rating: 5
   },
@@ -46,7 +46,7 @@ const testimonials = [
     name: 'Lisa Wang',
     role: 'Marketing Specialist',
     company: 'Innovation Labs',
-    avatar: '/avatars/lisa.jpg',
+    avatar: 'https://i.pravatar.cc/150?u=lisa',
     quote: 'The team collaboration features are fantastic. We can now work seamlessly across departments and track everything in one place.',
     rating: 5
   }
@@ -166,4 +166,4 @@ export function Testimonials() {
       </div>
     </section>
   )
-} 
+}

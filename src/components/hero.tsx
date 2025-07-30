@@ -40,8 +40,8 @@ export function Hero() {
       {/* Glassmorphism Overlay */}
       <div className="absolute inset-0 bg-white/5 backdrop-blur-sm"></div>
 
-      <div className="container-custom relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
+      <div className="container-custom relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+        <div className="text-center lg:text-left max-w-4xl mx-auto">
           {/* Badge */}
           <div className="hero-animate mb-8 opacity-0">
             <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-white/90">
@@ -63,7 +63,7 @@ export function Hero() {
 
           {/* CTA Buttons */}
           <div className="hero-animate flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12 opacity-0">
-            <Button size="lg" className="group">
+            <Button size="lg" className="group" onClick={() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' })}>
               Start Free Trial
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -95,9 +95,12 @@ export function Hero() {
               </div>
               <div className="text-3xl font-bold text-white">24/7</div>
               <div className="text-white/70">AI-Powered Optimization</div>
-            </div>
           </div>
         </div>
+        <div className="hidden lg:block">
+          <img src="https://i.imgur.com/6d2zC6d.png" alt="Dashboard preview" className="rounded-lg shadow-2xl animate-fade-in" />
+        </div>
+      </div>
       </div>
 
       {/* Floating Elements */}
@@ -109,4 +112,4 @@ export function Hero() {
       </div>
     </section>
   )
-} 
+}

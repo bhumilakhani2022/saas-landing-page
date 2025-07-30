@@ -40,9 +40,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
       {/* Author */}
       <div className="flex items-center space-x-4">
-        <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold">
-          {testimonial.name.charAt(0)}
-        </div>
+        <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 rounded-full" />
         <div>
           <div className="font-semibold text-gray-900 dark:text-white">
             {testimonial.name}
@@ -54,4 +52,4 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
       </div>
     </div>
   )
-} 
+}
