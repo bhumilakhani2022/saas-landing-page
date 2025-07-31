@@ -85,7 +85,7 @@ export function Hero() {
           >
             AI-Powered Marketing Suite
           </MUIButton>
-          <h1 className="hero-animate text-4xl md:text-5xl font-extrabold text-white mb-6 opacity-0 leading-tight">
+          <h1 className="hero-animate text-4xl md:text-5xl font-extrabold text-white mb-6 opacity-0">
             Transform Your <span className="block bg-gradient-to-r from-blue-400 to-fuchsia-500 bg-clip-text text-transparent">Marketing with AI</span>
           </h1>
           <p className="hero-animate text-lg md:text-xl text-white/90 mb-8 opacity-0 max-w-2xl leading-relaxed">

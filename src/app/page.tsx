@@ -9,6 +9,7 @@ import { Pricing } from '@/components/pricing'
 import { Testimonials } from '@/components/testimonials'
 import { FAQ } from '@/components/faq'
 import { Contact } from '@/components/contact'
+import { Blog } from '@/components/blog'
 import { Footer } from '@/components/footer'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { FloatingChat } from '@/components/floating-chat'
@@ -38,6 +39,7 @@ export default function Home() {
           <WhyChooseUs />
           <Pricing />
           <Testimonials />
+          <Blog />
           <FAQ />
           <Contact />
         </>

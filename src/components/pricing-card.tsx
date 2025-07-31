@@ -47,6 +47,7 @@ export function PricingCard({ plan, isAnnual, isSelected, onSelect }: PricingCar
         justifyContent: 'flex-start',
         background: 'rgba(255,255,255,0.65)',
         backdropFilter: 'blur(8px)',
+        height: '100%',
       }}
     >
       {/* Popular Badge */}

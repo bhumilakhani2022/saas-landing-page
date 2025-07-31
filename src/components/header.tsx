@@ -28,6 +28,7 @@ export function Header({ onShowDashboard, onShowHome }: { onShowDashboard: () =>
     { name: 'Features', href: '#features' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Testimonials', href: '#testimonials' },
+    { name: 'Blog', href: '#blog' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
     { name: 'Dashboard', action: onShowDashboard },

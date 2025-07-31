@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { motion } from 'framer-motion'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { FeatureCard } from './feature-card'
@@ -67,23 +67,26 @@ const features = [
 ]
 
 export function Features() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('animate-slide-up', 'opacity-100')
-            }, index * 100)
-          }
-        })
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
       },
-      { threshold: 0.1 }
-    )
-    const elements = document.querySelectorAll('.feature-animate')
-    elements.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+    },
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  }
 
   return (
     <section id="features" className="section-padding bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
@@ -103,18 +106,24 @@ export function Features() {
           </Typography>
         </Box>
         {/* Features Grid */}
-        <Box display="grid" gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }} gap={4}>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {features.map((feature, index) => (
-            <div key={feature.title} className="feature-animate opacity-0">
+            <motion.div key={feature.title} variants={itemVariants}>
               <FeatureCard
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
                 gradient={feature.color}
               />
-            </div>
+            </motion.div>
           ))}
-        </Box>
+        </motion.div>
       </Box>
     </section>
   )

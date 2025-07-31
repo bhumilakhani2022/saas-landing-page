@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { PricingCard } from './pricing-card'
 import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
@@ -78,6 +79,27 @@ export function Pricing() {
     return isAnnual ? Math.round(total * 0.8) : Math.round(total)
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  }
+
   return (
     <section id="pricing" className="section-padding bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
       <div className="container-custom">
@@ -120,17 +142,24 @@ export function Pricing() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 items-stretch">
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 items-stretch"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {pricingPlans.map((plan) => (
-            <PricingCard
-              key={plan.name}
-              plan={plan}
-              isAnnual={isAnnual}
-              isSelected={selectedPlan === plan.name}
-              onSelect={() => setSelectedPlan(plan.name)}
-            />
+            <motion.div key={plan.name} variants={itemVariants}>
+              <PricingCard
+                plan={plan}
+                isAnnual={isAnnual}
+                isSelected={selectedPlan === plan.name}
+                onSelect={() => setSelectedPlan(plan.name)}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Interactive Calculator with Material UI */}
         <Box className="bg-gradient-to-br from-primary-50 to-secondary-100 dark:from-gray-900 dark:to-gray-800 border-2 border-primary-400 dark:border-primary-600 rounded-2xl p-10 shadow-2xl my-8" maxWidth="700px" mx="auto" sx={{ background: theme => theme.palette.mode === 'dark' ? 'rgba(30,41,59,0.95)' : undefined }}>
