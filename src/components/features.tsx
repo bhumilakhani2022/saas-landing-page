@@ -18,8 +18,8 @@ import {
 const features = [
   {
     icon: Brain,
-    title: 'AI-Powered Insights',
-    description: 'Get intelligent recommendations and insights that help you make data-driven marketing decisions.',
+    title: 'AI-Driven Insights',
+    description: 'Leverage AI for actionable insights and data-driven marketing decisions.',
     color: 'from-blue-500 to-cyan-500'
   },
   {
@@ -94,11 +94,11 @@ export function Features() {
             <span role="img" aria-label="sparkles">✨</span>
             Powerful Features
           </Box>
-          <Typography variant="h3" fontWeight={800} color="text.primary" mb={2}>
+          <Typography variant="h3" fontWeight={800} className="text-gray-900 dark:text-white" mb={2}>
             Everything You Need to
             <span className="block gradient-text">Scale Your Marketing</span>
           </Typography>
-          <Typography variant="h6" color="text.secondary" maxWidth={600} mx="auto">
+          <Typography variant="h6" className="text-gray-600 dark:text-gray-300" maxWidth={600} mx="auto">
             From AI-powered insights to automated campaigns, we provide all the tools you need to create, optimize, and scale your marketing efforts.
           </Typography>
         </Box>

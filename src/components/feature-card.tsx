@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import { Brain, BarChart3, Zap, Target, Users, Shield, TrendingUp, MessageSquare } from 'lucide-react'
 
 const iconMap: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
-  'AI-Powered Insights': Brain,
+  'AI-Driven Insights': Brain,
   'Advanced Analytics': BarChart3,
   'Automated Campaigns': Zap,
   'Precision Targeting': Target,
@@ -54,11 +54,11 @@ export function FeatureCard({ icon, title, description, gradient }: FeatureCardP
     >
       <Box mb={2} display="flex" alignItems="center" justifyContent="flex-start">
         <Box
+          className={`bg-gradient-to-br ${gradient}`}
           sx={{
             width: 48,
             height: 48,
             borderRadius: 2,
-            background: gradient ? `linear-gradient(to bottom right, var(--${gradient.replace(' ', ', --')}) )` : 'linear-gradient(135deg, #38bdf8 0%, #a78bfa 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -67,17 +67,17 @@ export function FeatureCard({ icon, title, description, gradient }: FeatureCardP
             border: theme => theme.palette.mode === 'dark' ? '2px solid #6366f1' : '2px solid #38bdf8',
           }}
         >
-          <Icon style={{ width: 28, height: 28, color: '#fff' }} />
+          <Icon style={{ width: 28, height: 28 }} />
         </Box>
       </Box>
       <CardContent sx={{ p: 0, flex: 1, width: '100%' }}>
-        <Typography variant="h6" fontWeight={900} mb={1} sx={{ fontSize: 22, lineHeight: 1.3, color: theme => theme.palette.mode === 'dark' ? '#fff' : theme.palette.text.primary }}>
+        <Typography variant="h6" fontWeight={900} mb={1} sx={{ fontSize: 22, lineHeight: 1.3, color: 'text.primary' }}>
           {title}
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: 17, lineHeight: 1.7, color: theme => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.92)' : theme.palette.text.secondary }}>
+        <Typography variant="body2" sx={{ fontSize: 17, lineHeight: 1.7, color: 'text.secondary' }}>
           {description}
         </Typography>
       </CardContent>
     </Card>
   )
-} 
+}

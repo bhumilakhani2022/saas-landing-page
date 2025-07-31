@@ -40,6 +40,11 @@ export function Header({ onShowDashboard, onShowHome }: { onShowDashboard: () =>
     }, 100)
   }
 
+  const handleHomeNavigation = () => {
+    onShowHome()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const handleNavigation = (href: string) => {
     onShowHome()
     setTimeout(() => {
@@ -56,9 +61,12 @@ export function Header({ onShowDashboard, onShowHome }: { onShowDashboard: () =>
       position="fixed"
       elevation={0}
       sx={{
-        background: isScrolled
-          ? 'rgba(255,255,255,0.85)'
-          : 'rgba(30,41,59,0.7)',
+        background:
+          theme === 'dark'
+            ? 'rgba(15, 23, 42, 0.8)'
+            : isScrolled
+            ? 'rgba(255,255,255,0.85)'
+            : 'rgba(30,41,59,0.7)',
         backdropFilter: 'blur(12px)',
         borderBottom: isScrolled ? '1px solid rgba(100,116,139,0.12)' : 'none',
         boxShadow: '0 2px 24px 0 rgba(56,189,248,0.08)',
@@ -78,9 +86,9 @@ export function Header({ onShowDashboard, onShowHome }: { onShowDashboard: () =>
           {navigation.map((item) => (
             <Button
               key={item.name}
-              onClick={() => item.action ? item.action() : handleNavigation(item.href)}
+              onClick={() => item.name === 'Home' ? handleHomeNavigation() : (item.action ? item.action() : handleNavigation(item.href))}
               sx={{
-                color: isScrolled ? '#334155' : '#fff',
+                color: theme === 'dark' ? '#fff' : (isScrolled ? '#334155' : '#fff'),
                 fontWeight: 500,
                 fontSize: '1rem',
                 textTransform: 'none',
@@ -96,7 +104,7 @@ export function Header({ onShowDashboard, onShowHome }: { onShowDashboard: () =>
         <div className="hidden md:flex items-center space-x-4">
           <IconButton
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            sx={{ color: isScrolled ? '#334155' : '#fff' }}
+            sx={{ color: theme === 'dark' ? '#fff' : (isScrolled ? '#334155' : '#fff') }}
           >
             {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
@@ -123,7 +131,7 @@ export function Header({ onShowDashboard, onShowHome }: { onShowDashboard: () =>
         <div className="md:hidden">
           <IconButton
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            sx={{ color: isScrolled ? '#334155' : '#fff' }}
+            sx={{ color: theme === 'dark' ? '#fff' : (isScrolled ? '#334155' : '#fff') }}
           >
             <MenuIcon />
           </IconButton>
@@ -136,7 +144,7 @@ export function Header({ onShowDashboard, onShowHome }: { onShowDashboard: () =>
             {navigation.map((item) => (
               <Button
                 key={item.name}
-                onClick={() => item.action ? item.action() : handleNavigation(item.href)}
+                onClick={() => item.name === 'Home' ? handleHomeNavigation() : (item.action ? item.action() : handleNavigation(item.href))}
                 sx={{
                   color: '#334155',
                   fontWeight: 500,

@@ -71,7 +71,7 @@ export function Pricing() {
   const [monthlyCampaigns, setMonthlyCampaigns] = useState(100)
 
   const calculatePrice = () => {
-    const basePrice = 49
+    const basePrice = 59
     const memberPrice = teamMembers * 5
     const campaignPrice = monthlyCampaigns * 0.1
     const total = basePrice + memberPrice + campaignPrice
@@ -122,25 +122,24 @@ export function Pricing() {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 items-stretch">
           {pricingPlans.map((plan) => (
-            <div key={plan.name} className="flex">
-              <PricingCard
-                plan={plan}
-                isAnnual={isAnnual}
-                isSelected={selectedPlan === plan.name}
-                onSelect={() => setSelectedPlan(plan.name)}
-              />
-            </div>
+            <PricingCard
+              key={plan.name}
+              plan={plan}
+              isAnnual={isAnnual}
+              isSelected={selectedPlan === plan.name}
+              onSelect={() => setSelectedPlan(plan.name)}
+            />
           ))}
         </div>
 
         {/* Interactive Calculator with Material UI */}
         <Box className="bg-gradient-to-br from-primary-50 to-secondary-100 dark:from-gray-900 dark:to-gray-800 border-2 border-primary-400 dark:border-primary-600 rounded-2xl p-10 shadow-2xl my-8" maxWidth="700px" mx="auto" sx={{ background: theme => theme.palette.mode === 'dark' ? 'rgba(30,41,59,0.95)' : undefined }}>
-          <Typography component="h3" fontSize={28} fontWeight={700} mb={4} textAlign="center" letterSpacing={2} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'primary.700' }}>
+          <Typography component="h3" fontSize={28} fontWeight={700} mb={4} textAlign="center" letterSpacing={2} className="text-gray-900 dark:text-white">
             Custom Pricing Calculator
           </Typography>
           <Box display="grid" gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr 1fr' }} gap={4} alignItems="center">
             <Box>
-              <Typography fontWeight={600} mb={1} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'text.primary' }}>
+              <Typography fontWeight={600} mb={1} className="text-gray-900 dark:text-white">
                 Team Members
               </Typography>
               <Slider
@@ -157,13 +156,18 @@ export function Pricing() {
                 label=""
                 value={teamMembers}
                 onChange={e => setTeamMembers(Number(e.target.value))}
-                inputProps={{ min: 1, max: 100, style: { color: '#fff' } }}
+                inputProps={{ min: 1, max: 100 }}
                 fullWidth
-                sx={{ input: { color: theme => theme.palette.mode === 'dark' ? '#fff' : undefined }, background: theme => theme.palette.mode === 'dark' ? '#23272f' : undefined }}
+                sx={{
+                  input: { 
+                    color: theme => theme.palette.mode === 'dark' ? '#fff' : '#000',
+                    backgroundColor: theme => theme.palette.mode === 'dark' ? '#23272f' : '#fff',
+                  },
+                }}
               />
             </Box>
             <Box>
-              <Typography fontWeight={600} mb={1} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'text.primary' }}>
+              <Typography fontWeight={600} mb={1} className="text-gray-900 dark:text-white">
                 Monthly Campaigns
               </Typography>
               <Slider
@@ -180,13 +184,18 @@ export function Pricing() {
                 label=""
                 value={monthlyCampaigns}
                 onChange={e => setMonthlyCampaigns(Number(e.target.value))}
-                inputProps={{ min: 10, max: 1000, style: { color: '#fff' } }}
+                inputProps={{ min: 10, max: 1000 }}
                 fullWidth
-                sx={{ input: { color: theme => theme.palette.mode === 'dark' ? '#fff' : undefined }, background: theme => theme.palette.mode === 'dark' ? '#23272f' : undefined }}
+                sx={{
+                  input: { 
+                    color: theme => theme.palette.mode === 'dark' ? '#fff' : '#000',
+                    backgroundColor: theme => theme.palette.mode === 'dark' ? '#23272f' : '#fff',
+                  },
+                }}
               />
             </Box>
             <Box textAlign="center">
-              <Typography fontWeight={600} mb={1} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'text.primary' }}>
+              <Typography fontWeight={600} mb={1} className="text-gray-900 dark:text-white">
                 Estimated Cost
               </Typography>
               <Box fontSize={36} fontWeight={900} color={theme => theme.palette.mode === 'dark' ? '#fff' : 'primary.main'} bgcolor={theme => theme.palette.mode === 'dark' ? '#1e293b' : '#fff'} borderRadius={3} px={4} py={2} boxShadow={3} border={2} borderColor={theme => theme.palette.mode === 'dark' ? 'primary.700' : 'primary.200'}>

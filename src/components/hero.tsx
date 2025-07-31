@@ -85,10 +85,10 @@ export function Hero() {
           >
             AI-Powered Marketing Suite
           </MUIButton>
-          <h1 className="hero-animate text-4xl md:text-6xl font-extrabold text-white mb-6 opacity-0 leading-tight">
+          <h1 className="hero-animate text-4xl md:text-5xl font-extrabold text-white mb-6 opacity-0 leading-tight">
             Transform Your <span className="block bg-gradient-to-r from-blue-400 to-fuchsia-500 bg-clip-text text-transparent">Marketing with AI</span>
           </h1>
-          <p className="hero-animate text-lg md:text-2xl text-white/90 mb-8 opacity-0 max-w-2xl leading-relaxed">
+          <p className="hero-animate text-lg md:text-xl text-white/90 mb-8 opacity-0 max-w-2xl leading-relaxed">
             The complete AI-powered marketing suite that helps you create, optimize, and scale your campaigns with unprecedented precision and efficiency.
           </p>
           <div className="hero-animate flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12 opacity-0">
@@ -175,7 +175,7 @@ export function Hero() {
             <iframe
               width="100%"
               height="400"
-              src="https://www.youtube.com/embed/2eA8gkG7Ghc"
+              src="https://www.youtube.com/embed/uTrQNyEJflI"
               title="Demo Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
