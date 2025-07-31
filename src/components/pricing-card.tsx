@@ -1,5 +1,12 @@
 'use client'
 
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
+import Button from '@mui/material/Button'
+import Chip from '@mui/material/Chip'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 import { Check, Star } from 'lucide-react'
 
 interface PricingPlan {
@@ -23,74 +30,116 @@ export function PricingCard({ plan, isAnnual, isSelected, onSelect }: PricingCar
   const displayPrice = isAnnual ? annualPrice : plan.price
 
   return (
-    <div className={`relative group w-full ${isSelected ? 'scale-105' : ''} transition-all duration-300`}>
+    <Card
+      elevation={isSelected ? 8 : 2}
+      sx={{
+        position: 'relative',
+        borderRadius: '1.5rem',
+        p: 0,
+        overflow: 'visible',
+        border: isSelected ? '2.5px solid #6366f1' : '1.5px solid rgba(100,116,139,0.10)',
+        boxShadow: isSelected ? '0 8px 32px 0 rgba(99,102,241,0.18)' : '0 2px 16px 0 rgba(56,189,248,0.08)',
+        transform: isSelected ? 'scale(1.045)' : 'scale(1)',
+        transition: 'box-shadow 0.3s, border 0.3s, transform 0.3s',
+        minHeight: 420,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        background: 'rgba(255,255,255,0.65)',
+        backdropFilter: 'blur(8px)',
+      }}
+    >
       {/* Popular Badge */}
       {plan.popular && (
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center space-x-1">
-            <Star className="w-4 h-4" />
-            <span>Most Popular</span>
-          </div>
-        </div>
+        <Chip
+          icon={<Star style={{ color: '#facc15', fontSize: 18 }} />}
+          label="Most Popular"
+          color="primary"
+          sx={{
+            position: 'absolute',
+            top: -18,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            fontWeight: 700,
+            fontSize: 15,
+            px: 2,
+            py: 0.5,
+            borderRadius: '9999px',
+            background: 'linear-gradient(90deg, #6366f1 0%, #a21caf 100%)',
+            color: '#fff',
+            zIndex: 2,
+          }}
+        />
       )}
-
-      <div className={`relative p-8 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border-2 rounded-2xl transition-all duration-300 flex flex-col h-full ${
-        isSelected 
-          ? 'border-primary-500 shadow-xl' 
-          : 'border-gray-200/20 dark:border-gray-700/20 hover:border-primary-300/50'
-      }`}>
-        {/* Gradient Background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
-        
-        {/* Header */}
-        <div className="relative text-center mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            {plan.name}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
-            {plan.description}
-          </p>
-          <div className="mb-6">
-            <span className="text-4xl font-bold text-gray-900 dark:text-white">
-              ${displayPrice}
-            </span>
-            <span className="text-gray-500 dark:text-gray-400">/month</span>
-          </div>
-          {isAnnual && (
-            <div className="text-sm text-primary-600 dark:text-primary-400 font-medium">
-              Save 20% with annual billing
-            </div>
-          )}
-        </div>
-
-        {/* Features */}
-        <div className="relative space-y-4 mb-8 flex-grow">
+      <CardContent sx={{ pt: 5, pb: 2, px: 4, textAlign: 'center', flexGrow: 1 }}>
+        <Typography variant="h5" fontWeight={800} color="text.primary" mb={1}>
+          {plan.name}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary" mb={3}>
+          {plan.description}
+        </Typography>
+        <Box mb={3}>
+          <Typography variant="h3" fontWeight={900} color="text.primary" display="inline">
+            ${displayPrice}
+          </Typography>
+          <Typography variant="subtitle2" color="text.secondary" display="inline">
+            /month
+          </Typography>
+        </Box>
+        {isAnnual && (
+          <Typography variant="body2" color="primary" fontWeight={600} mb={2}>
+            Save 20% with annual billing
+          </Typography>
+        )}
+        <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0, mb: 3, textAlign: 'left' }}>
           {plan.features.map((feature, index) => (
-            <div key={index} className="flex items-start space-x-3">
-              <div className="flex-shrink-0 w-5 h-5 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mt-0.5">
-                <Check className="w-3 h-3 text-green-600 dark:text-green-400" />
-              </div>
-              <span className="text-gray-700 dark:text-gray-300 text-sm">
+            <Box key={index} component="li" display="flex" alignItems="center" mb={1.2} gap={1.2}>
+              <Box
+                sx={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: '50%',
+                  background: '#d1fae5',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Check style={{ color: '#059669', fontSize: 16 }} />
+              </Box>
+              <Typography variant="body2" color="text.secondary">
                 {feature}
-              </span>
-            </div>
+              </Typography>
+            </Box>
           ))}
-        </div>
-
-        {/* CTA Button */}
-        <div className="relative mt-auto">
-          <button
-            onClick={onSelect}
-            className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${
-              isSelected
-                ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-lg'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-primary-500 hover:text-white'
-            }`}
-          >
-            {isSelected ? 'Current Plan' : 'Choose Plan'}
-          </button>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </CardContent>
+      <CardActions sx={{ px: 4, pb: 4, pt: 0 }}>
+        <Button
+          onClick={onSelect}
+          fullWidth
+          size="large"
+          variant={isSelected ? 'contained' : 'outlined'}
+          sx={{
+            background: isSelected ? 'linear-gradient(90deg, #38bdf8 0%, #a78bfa 100%)' : 'rgba(255,255,255,0.85)',
+            color: isSelected ? '#fff' : '#6366f1',
+            fontWeight: 700,
+            fontSize: '1.1rem',
+            borderRadius: '0.75rem',
+            boxShadow: isSelected ? '0 4px 24px 0 rgba(56,189,248,0.15)' : 'none',
+            border: isSelected ? 'none' : '2px solid #6366f1',
+            textTransform: 'none',
+            '&:hover': {
+              background: isSelected
+                ? 'linear-gradient(90deg, #2563eb 0%, #a21caf 100%)'
+                : 'rgba(99,102,241,0.08)',
+              color: '#6366f1',
+            },
+          }}
+        >
+          {isSelected ? 'Current Plan' : 'Choose Plan'}
+        </Button>
+      </CardActions>
+    </Card>
   )
 }

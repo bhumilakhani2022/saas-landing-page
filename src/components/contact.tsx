@@ -44,7 +44,7 @@ export function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Let’s Connect</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">Have questions or want a demo? Fill out the form and our team will reach out!</p>
         </div>
-        <form className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-8 shadow-lg space-y-6" onSubmit={handleSubmit} noValidate>
+        <form className="bg-white/90 dark:bg-gray-800/90 border border-primary-300 dark:border-primary-700 rounded-2xl p-8 shadow-2xl space-y-6" onSubmit={handleSubmit} noValidate>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
             <input

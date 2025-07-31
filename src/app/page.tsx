@@ -17,10 +17,18 @@ import { WhyChooseUs } from '@/components/why-choose-us'
 export default function Home() {
   const [showDashboard, setShowDashboard] = useState(false)
 
+  const handleShowDashboard = () => {
+    setShowDashboard(true)
+  }
+
+  const handleShowHome = () => {
+    setShowDashboard(false)
+  }
+
   return (
     <main className="min-h-screen gradient-bg">
       <ScrollProgress />
-      <Header onShowDashboard={() => setShowDashboard(true)} onShowHome={() => setShowDashboard(false)} />
+      <Header onShowDashboard={handleShowDashboard} onShowHome={handleShowHome} />
       {showDashboard ? (
         <DashboardContent />
       ) : (

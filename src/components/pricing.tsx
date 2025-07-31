@@ -2,6 +2,12 @@
 
 import { useState } from 'react'
 import { PricingCard } from './pricing-card'
+import Box from '@mui/material/Box'
+import Slider from '@mui/material/Slider'
+import TextField from '@mui/material/TextField'
+import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
+import Typography from '@mui/material/Typography'
 import { Check, Star } from 'lucide-react'
 
 const pricingPlans = [
@@ -81,11 +87,11 @@ export function Pricing() {
             <span>💰</span>
             <span>Simple Pricing</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
             Choose the Perfect
             <span className="block gradient-text">Plan for Your Business</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
             Start free and scale as you grow. No hidden fees, no surprises.
           </p>
 
@@ -127,60 +133,74 @@ export function Pricing() {
           ))}
         </div>
 
-        {/* Interactive Calculator */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200/20 dark:border-gray-700/20">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+        {/* Interactive Calculator with Material UI */}
+        <Box className="bg-gradient-to-br from-primary-50 to-secondary-100 dark:from-gray-900 dark:to-gray-800 border-2 border-primary-400 dark:border-primary-600 rounded-2xl p-10 shadow-2xl my-8" maxWidth="700px" mx="auto" sx={{ background: theme => theme.palette.mode === 'dark' ? 'rgba(30,41,59,0.95)' : undefined }}>
+          <Typography component="h3" fontSize={28} fontWeight={700} mb={4} textAlign="center" letterSpacing={2} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'primary.700' }}>
             Custom Pricing Calculator
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          </Typography>
+          <Box display="grid" gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr 1fr' }} gap={4} alignItems="center">
+            <Box>
+              <Typography fontWeight={600} mb={1} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'text.primary' }}>
                 Team Members
-              </label>
-              <input
-                type="range"
-                min="1"
-                max="100"
+              </Typography>
+              <Slider
+                min={1}
+                max={100}
                 value={teamMembers}
-                onChange={(e) => setTeamMembers(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                onChange={(_, value) => setTeamMembers(Number(value))}
+                color="primary"
+                sx={{ mb: 2, '& .MuiSlider-thumb': { color: theme => theme.palette.mode === 'dark' ? '#fff' : undefined }, '& .MuiSlider-rail': { backgroundColor: theme => theme.palette.mode === 'dark' ? '#334155' : undefined } }}
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span>1</span>
-                <span>{teamMembers}</span>
-                <span>100+</span>
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <TextField
+                type="number"
+                size="small"
+                label=""
+                value={teamMembers}
+                onChange={e => setTeamMembers(Number(e.target.value))}
+                inputProps={{ min: 1, max: 100, style: { color: '#fff' } }}
+                fullWidth
+                sx={{ input: { color: theme => theme.palette.mode === 'dark' ? '#fff' : undefined }, background: theme => theme.palette.mode === 'dark' ? '#23272f' : undefined }}
+              />
+            </Box>
+            <Box>
+              <Typography fontWeight={600} mb={1} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'text.primary' }}>
                 Monthly Campaigns
-              </label>
-              <input
-                type="range"
-                min="10"
-                max="1000"
+              </Typography>
+              <Slider
+                min={10}
+                max={1000}
                 value={monthlyCampaigns}
-                onChange={(e) => setMonthlyCampaigns(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                onChange={(_, value) => setMonthlyCampaigns(Number(value))}
+                color="secondary"
+                sx={{ mb: 2, '& .MuiSlider-thumb': { color: theme => theme.palette.mode === 'dark' ? '#fff' : undefined }, '& .MuiSlider-rail': { backgroundColor: theme => theme.palette.mode === 'dark' ? '#334155' : undefined } }}
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span>10</span>
-                <span>{monthlyCampaigns}</span>
-                <span>1000+</span>
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <TextField
+                type="number"
+                size="small"
+                label=""
+                value={monthlyCampaigns}
+                onChange={e => setMonthlyCampaigns(Number(e.target.value))}
+                inputProps={{ min: 10, max: 1000, style: { color: '#fff' } }}
+                fullWidth
+                sx={{ input: { color: theme => theme.palette.mode === 'dark' ? '#fff' : undefined }, background: theme => theme.palette.mode === 'dark' ? '#23272f' : undefined }}
+              />
+            </Box>
+            <Box textAlign="center">
+              <Typography fontWeight={600} mb={1} sx={{ color: theme => theme.palette.mode === 'dark' ? '#fff' : 'text.primary' }}>
                 Estimated Cost
-              </label>
-              <div className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+              </Typography>
+              <Box fontSize={36} fontWeight={900} color={theme => theme.palette.mode === 'dark' ? '#fff' : 'primary.main'} bgcolor={theme => theme.palette.mode === 'dark' ? '#1e293b' : '#fff'} borderRadius={3} px={4} py={2} boxShadow={3} border={2} borderColor={theme => theme.palette.mode === 'dark' ? 'primary.700' : 'primary.200'}>
                 ${calculatePrice()}
-                <span className="text-sm font-normal text-gray-500">/month</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+                <Typography component="span" fontSize={16} fontWeight={400} sx={{ color: theme => theme.palette.mode === 'dark' ? '#e5e7eb' : 'text.secondary' }}>/month</Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        {/* Material UI Alert Demo */}
+        <Alert severity="info" sx={{ mt: 4, maxWidth: 600, mx: 'auto' }}>
+          <AlertTitle>Tip</AlertTitle>
+          You can use the calculator above to estimate your monthly cost based on your team size and campaign volume. For enterprise pricing, contact our sales team.
+        </Alert>
         {/* FAQ Link */}
         <div className="text-center mt-12">
           <p className="text-gray-600 dark:text-gray-300 mb-4">

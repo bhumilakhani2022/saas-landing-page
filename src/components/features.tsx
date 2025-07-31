@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import { FeatureCard } from './feature-card'
 import { 
   Brain, 
@@ -78,33 +80,30 @@ export function Features() {
       },
       { threshold: 0.1 }
     )
-
     const elements = document.querySelectorAll('.feature-animate')
     elements.forEach((el) => observer.observe(el))
-
     return () => observer.disconnect()
   }, [])
 
   return (
     <section id="features" className="section-padding bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="container-custom">
+      <Box className="container-custom">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 rounded-full px-4 py-2 text-sm font-medium mb-4">
-            <span>✨</span>
-            <span>Powerful Features</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+        <Box textAlign="center" mb={10}>
+          <Box display="inline-flex" alignItems="center" gap={1} px={2} py={1} borderRadius={9999} bgcolor="primary.50" color="primary.600" fontWeight={500} fontSize={16} mb={2}>
+            <span role="img" aria-label="sparkles">✨</span>
+            Powerful Features
+          </Box>
+          <Typography variant="h3" fontWeight={800} color="text.primary" mb={2}>
             Everything You Need to
             <span className="block gradient-text">Scale Your Marketing</span>
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          </Typography>
+          <Typography variant="h6" color="text.secondary" maxWidth={600} mx="auto">
             From AI-powered insights to automated campaigns, we provide all the tools you need to create, optimize, and scale your marketing efforts.
-          </p>
-        </div>
-
+          </Typography>
+        </Box>
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <Box display="grid" gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }} gap={4}>
           {features.map((feature, index) => (
             <div key={feature.title} className="feature-animate opacity-0">
               <FeatureCard
@@ -115,9 +114,8 @@ export function Features() {
               />
             </div>
           ))}
-        </div>
-
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

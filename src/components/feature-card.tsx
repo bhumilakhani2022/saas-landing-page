@@ -1,6 +1,22 @@
 'use client'
 
 import { ComponentType, SVGProps } from 'react'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import { Brain, BarChart3, Zap, Target, Users, Shield, TrendingUp, MessageSquare } from 'lucide-react'
+
+const iconMap: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  'AI-Powered Insights': Brain,
+  'Advanced Analytics': BarChart3,
+  'Automated Campaigns': Zap,
+  'Precision Targeting': Target,
+  'Team Collaboration': Users,
+  'Enterprise Security': Shield,
+  'Performance Optimization': TrendingUp,
+  'Smart Messaging': MessageSquare,
+}
 
 interface FeatureCardProps {
   icon: ComponentType<SVGProps<SVGSVGElement>>
@@ -9,31 +25,59 @@ interface FeatureCardProps {
   gradient: string
 }
 
-export function FeatureCard({ icon: Icon, title, description, gradient }: FeatureCardProps) {
+export function FeatureCard({ icon, title, description, gradient }: FeatureCardProps) {
+  const Icon = iconMap[title] || icon
   return (
-    <div className="group relative p-6 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-gray-200/20 dark:border-gray-700/20 rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
-      {/* Gradient Background */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
-      
-      {/* Icon */}
-      <div className="relative mb-4">
-        <div className={`w-12 h-12 bg-gradient-to-br ${gradient} rounded-xl flex items-center justify-center text-white shadow-lg`}>
-          <Icon className="w-6 h-6" />
-        </div>
-      </div>
-      
-      {/* Content */}
-      <div className="relative">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+    <Card
+      elevation={6}
+      sx={{
+        position: 'relative',
+        borderRadius: '1.5rem',
+        p: 3,
+        background: theme => theme.palette.mode === 'dark' ? 'rgba(36,41,47,0.98)' : '#fff',
+        border: '2.5px solid',
+        borderColor: theme => theme.palette.mode === 'dark' ? 'rgba(99,102,241,0.18)' : 'rgba(56,189,248,0.10)',
+        boxShadow: '0 6px 32px 0 rgba(56,189,248,0.10)',
+        minHeight: 260,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        transition: 'box-shadow 0.3s, border 0.3s, transform 0.3s',
+        '&:hover': {
+          boxShadow: '0 12px 40px 0 rgba(56,189,248,0.18)',
+          borderColor: '#6366f1',
+          transform: 'translateY(-4px) scale(1.03)',
+        },
+      }}
+    >
+      <Box mb={2} display="flex" alignItems="center" justifyContent="flex-start">
+        <Box
+          sx={{
+            width: 48,
+            height: 48,
+            borderRadius: 2,
+            background: gradient ? `linear-gradient(to bottom right, var(--${gradient.replace(' ', ', --')}) )` : 'linear-gradient(135deg, #38bdf8 0%, #a78bfa 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            boxShadow: 4,
+            border: theme => theme.palette.mode === 'dark' ? '2px solid #6366f1' : '2px solid #38bdf8',
+          }}
+        >
+          <Icon style={{ width: 28, height: 28, color: '#fff' }} />
+        </Box>
+      </Box>
+      <CardContent sx={{ p: 0, flex: 1, width: '100%' }}>
+        <Typography variant="h6" fontWeight={900} mb={1} sx={{ fontSize: 22, lineHeight: 1.3, color: theme => theme.palette.mode === 'dark' ? '#fff' : theme.palette.text.primary }}>
           {title}
-        </h3>
-        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+        </Typography>
+        <Typography variant="body2" sx={{ fontSize: 17, lineHeight: 1.7, color: theme => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.92)' : theme.palette.text.secondary }}>
           {description}
-        </p>
-      </div>
-      
-      {/* Hover Effect */}
-      <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-primary-500/20 transition-colors duration-300 pointer-events-none"></div>
-    </div>
+        </Typography>
+      </CardContent>
+    </Card>
   )
 } 

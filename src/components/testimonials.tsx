@@ -85,11 +85,11 @@ export function Testimonials() {
             <Quote className="w-4 h-4" />
             <span>Customer Stories</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
             Loved by
             <span className="block gradient-text">Marketing Teams Worldwide</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             See how leading companies are transforming their marketing with ADmyBRAND AI Suite.
           </p>
         </div>
@@ -147,20 +147,20 @@ export function Testimonials() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-16">
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">10,000+</div>
-            <div className="text-gray-600 dark:text-gray-300">Happy Customers</div>
+            <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">10,000+</div>
+            <div className="text-gray-600 dark:text-gray-300 text-sm">Happy Customers</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">50+</div>
-            <div className="text-gray-600 dark:text-gray-300">Countries</div>
+            <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">50+</div>
+            <div className="text-gray-600 dark:text-gray-300 text-sm">Countries</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">4.9/5</div>
-            <div className="text-gray-600 dark:text-gray-300">Average Rating</div>
+            <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">4.9/5</div>
+            <div className="text-gray-600 dark:text-gray-300 text-sm">Average Rating</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">99.9%</div>
-            <div className="text-gray-600 dark:text-gray-300">Uptime</div>
+            <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">99.9%</div>
+            <div className="text-gray-600 dark:text-gray-300 text-sm">Uptime</div>
           </div>
         </div>
       </div>

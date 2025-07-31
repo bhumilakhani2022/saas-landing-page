@@ -1,112 +1,193 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { Button } from './ui/button'
-import { Play, ArrowRight, Sparkles, Zap, Target } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Button as MUIButton } from '@mui/material'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import Dialog from '@mui/material/Dialog'
+import IconButton from '@mui/material/IconButton'
+import CloseIcon from '@mui/icons-material/Close'
+import Box from '@mui/material/Box'
+import { Sparkles, Zap, Target } from 'lucide-react'
 
 export function Hero() {
-  const videoRef = useRef(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [imageVisible, setImageVisible] = useState(false)
+  const [demoOpen, setDemoOpen] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        entries.forEach((entry, idx) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in')
+            setTimeout(() => {
+              entry.target.classList.add('animate-fade-in')
+            }, idx * 200)
           }
         })
       },
       { threshold: 0.1 }
     )
-
     const elements = document.querySelectorAll('.hero-animate')
-    elements.forEach((el) => observer.observe(el))
-
+    elements.forEach((el, idx) => observer.observe(el))
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    // Only fade in, no scale or float
+    setTimeout(() => setImageVisible(true), 300)
   }, [])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 hero-gradient opacity-90"></div>
-      
-      {/* Animated Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary-400/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute top-40 right-20 w-96 h-96 bg-secondary-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 left-1/4 w-64 h-64 bg-primary-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+      {/* SVG/Gradient background for depth */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <svg className="w-full h-full" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="heroGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#0ea5e9" />
+              <stop offset="100%" stopColor="#d946ef" />
+            </linearGradient>
+            <radialGradient id="heroRadial" cx="50%" cy="50%" r="80%">
+              <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="1440" height="900" fill="url(#heroGradient)" />
+          <ellipse cx="900" cy="200" rx="400" ry="200" fill="url(#heroRadial)" />
+          <ellipse cx="400" cy="700" rx="300" ry="150" fill="url(#heroRadial)" />
+        </svg>
+        <div className="absolute inset-0 bg-black/30" />
       </div>
-
-      {/* Glassmorphism Overlay */}
-      <div className="absolute inset-0 bg-white/5 backdrop-blur-sm"></div>
-
-      <div className="container-custom relative z-10 grid lg:grid-cols-2 gap-8 items-center">
-        <div className="text-center lg:text-left max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="hero-animate mb-8 opacity-0">
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-white/90">
-              <Sparkles className="w-4 h-4 text-yellow-400" />
-              <span className="text-sm font-medium">AI-Powered Marketing Suite</span>
-            </div>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="hero-animate text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 opacity-0 leading-tight">
-            Transform Your
-            <span className="block gradient-text">Marketing with AI</span>
+      <div className="container-custom relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-screen py-12">
+        {/* Left: Text Content */}
+        <div className="w-full flex flex-col justify-center items-start text-left max-w-2xl mx-auto lg:mx-0">
+          <MUIButton
+            variant="contained"
+            startIcon={<Sparkles style={{ color: '#facc15' }} />}
+            sx={{
+              background: 'rgba(255,255,255,0.15)',
+              color: '#fff',
+              borderRadius: '9999px',
+              fontWeight: 500,
+              fontSize: '1rem',
+              mb: 3,
+              px: 2.5,
+              py: 1,
+              boxShadow: 'none',
+              textTransform: 'none',
+              backdropFilter: 'blur(6px)',
+              '&:hover': { background: 'rgba(255,255,255,0.25)' }
+            }}
+            disableElevation
+            disableRipple
+            tabIndex={-1}
+          >
+            AI-Powered Marketing Suite
+          </MUIButton>
+          <h1 className="hero-animate text-4xl md:text-6xl font-extrabold text-white mb-6 opacity-0 leading-tight">
+            Transform Your <span className="block bg-gradient-to-r from-blue-400 to-fuchsia-500 bg-clip-text text-transparent">Marketing with AI</span>
           </h1>
-
-          {/* Subtitle */}
-          <p className="hero-animate text-xl md:text-2xl text-white/80 mb-8 opacity-0 max-w-3xl mx-auto leading-relaxed">
+          <p className="hero-animate text-lg md:text-2xl text-white/90 mb-8 opacity-0 max-w-2xl leading-relaxed">
             The complete AI-powered marketing suite that helps you create, optimize, and scale your campaigns with unprecedented precision and efficiency.
           </p>
-
-          {/* CTA Buttons */}
-          <div className="hero-animate flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12 opacity-0">
-            <Button size="lg" className="group" onClick={() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' })}>
-              Start Free Trial
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button variant="secondary" size="lg" className="group">
-              <Play className="mr-2 w-5 h-5" />
+          <div className="hero-animate flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12 opacity-0">
+            <MUIButton
+              variant="contained"
+              endIcon={<ArrowForwardIcon />}
+              sx={{
+                background: 'linear-gradient(90deg, #38bdf8 0%, #a78bfa 100%)',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: '1.1rem',
+                px: 4,
+                py: 1.5,
+                borderRadius: '0.75rem',
+                boxShadow: '0 4px 24px 0 rgba(56,189,248,0.15)',
+                textTransform: 'none',
+                '&:hover': { background: 'linear-gradient(90deg, #2563eb 0%, #a21caf 100%)' }
+              }}
+              onClick={() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Start Trial
+            </MUIButton>
+            <MUIButton
+              variant="outlined"
+              startIcon={<PlayArrowIcon />}
+              sx={{
+                color: '#fff',
+                borderColor: 'rgba(255,255,255,0.4)',
+                fontWeight: 700,
+                fontSize: '1.1rem',
+                px: 4,
+                py: 1.5,
+                borderRadius: '0.75rem',
+                background: 'rgba(255,255,255,0.08)',
+                textTransform: 'none',
+                '&:hover': { background: 'rgba(255,255,255,0.18)', borderColor: '#fff' }
+              }}
+              onClick={() => setDemoOpen(true)}
+            >
               Watch Demo
-            </Button>
+            </MUIButton>
           </div>
-
-          {/* Stats */}
-          <div className="hero-animate grid grid-cols-1 md:grid-cols-3 gap-8 opacity-0">
-            <div className="text-center">
-              <div className="flex items-center justify-center mb-2">
-                <Zap className="w-8 h-8 text-yellow-400" />
-              </div>
-              <div className="text-3xl font-bold text-white">10x</div>
-              <div className="text-white/70">Faster Campaign Creation</div>
+          <div className="hero-animate flex flex-row items-center gap-10 opacity-0 mt-8">
+            <div className="flex flex-col items-center">
+              <Zap className="w-7 h-7 text-yellow-400 mb-2" />
+              <div className="text-xl font-bold text-white">10x</div>
+              <div className="text-white/80 text-sm">Faster Campaign Creation</div>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center mb-2">
-                <Target className="w-8 h-8 text-green-400" />
-              </div>
-              <div className="text-3xl font-bold text-white">95%</div>
-              <div className="text-white/70">Higher Conversion Rates</div>
+            <div className="flex flex-col items-center">
+              <Target className="w-7 h-7 text-green-400 mb-2" />
+              <div className="text-xl font-bold text-white">95%</div>
+              <div className="text-white/80 text-sm">Higher Conversion Rates</div>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center mb-2">
-                <Sparkles className="w-8 h-8 text-purple-400" />
-              </div>
-              <div className="text-3xl font-bold text-white">24/7</div>
-              <div className="text-white/70">AI-Powered Optimization</div>
+            <div className="flex flex-col items-center">
+              <Sparkles className="w-7 h-7 text-purple-400 mb-2" />
+              <div className="text-xl font-bold text-white">24/7</div>
+              <div className="text-white/80 text-sm">AI-Powered Optimization</div>
+            </div>
           </div>
         </div>
-        <div className="hidden lg:block">
-          <img src="https://i.imgur.com/6d2zC6d.png" alt="Dashboard preview" className="rounded-lg shadow-2xl animate-fade-in" />
+        {/* Right: Image Content, always visible */}
+        <div className="w-full flex justify-center items-center mt-12 lg:mt-0">
+          <div className="relative w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10">
+            <img
+              src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=900&q=80"
+              alt="Modern Marketing Analytics Dashboard Preview"
+              className="w-full h-auto object-cover object-center rounded-2xl"
+              style={{ background: '#1a1a1a' }}
+            />
+          </div>
         </div>
       </div>
-      </div>
-
-      {/* Floating Elements */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        <div className="flex items-center space-x-2 text-white/60 text-sm">
-          <div className="w-2 h-2 bg-white/40 rounded-full animate-pulse"></div>
+      {/* Demo Video Modal */}
+      <Dialog open={demoOpen} onClose={() => setDemoOpen(false)} maxWidth="md" fullWidth>
+        <Box position="relative" bgcolor="#000">
+          <IconButton
+            aria-label="close"
+            onClick={() => setDemoOpen(false)}
+            sx={{ position: 'absolute', top: 8, right: 8, zIndex: 10, color: '#fff' }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Box pt={6} pb={2} px={2} display="flex" justifyContent="center" alignItems="center">
+            <iframe
+              width="100%"
+              height="400"
+              src="https://www.youtube.com/embed/2eA8gkG7Ghc"
+              title="Demo Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ borderRadius: 16, background: '#000' }}
+            />
+          </Box>
+        </Box>
+      </Dialog>
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30">
+        <div className="flex items-center space-x-2 text-white/80 text-sm">
+          <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
           <span>Scroll to explore</span>
         </div>
       </div>

@@ -33,8 +33,8 @@ const faqs = [
     answer: 'Yes, you can cancel your subscription at any time with no penalties. We believe in earning your business every day, so there are no long-term contracts or hidden fees.'
   },
   {
-    question: 'Do you offer a free trial?',
-    answer: 'Yes! We offer a 14-day free trial with full access to all features. No credit card required to start your trial. You can upgrade to a paid plan anytime during or after the trial.'
+    question: 'Do you offer a trial?',
+    answer: 'Yes! We offer a 14-day trial with full access to all features. No credit card required to start your trial. You can upgrade to a paid plan anytime during or after the trial.'
   }
 ]
 
@@ -105,7 +105,13 @@ export function FAQ() {
               Our team is here to help you get the most out of ADmyBRAND AI Suite.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-white text-primary-600 font-semibold px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors duration-300">
+              <button
+                className="bg-white text-primary-600 font-semibold px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors duration-300"
+                onClick={() => {
+                  const el = document.querySelector('#contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 Contact Support
               </button>
               <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/20 transition-colors duration-300">
